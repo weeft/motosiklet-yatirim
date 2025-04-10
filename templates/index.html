@@ -228,14 +228,23 @@
   let manualSort = false;
 
   
-function sortTable(columnIndex, type, forceBest = false) {
-    if (!forceBest) {
-        manualSort = true;
-        const bestSortBox = document.getElementById("best_sort");
-        if (bestSortBox && bestSortBox.checked) {
-            bestSortBox.checked = false;
-        }
+
+function sortTable(columnIndex, type, forceBest = false, directionOverride = null) {
+  if (!forceBest) {
+    manualSort = true;
+    const bestSortBox = document.getElementById("best_sort");
+    if (bestSortBox && bestSortBox.checked) {
+      bestSortBox.checked = false;
     }
+  }
+
+  if (!forceBest) {
+    manualSort = true;
+    const bestSortBox = document.getElementById("best_sort");
+    if (bestSortBox && bestSortBox.checked) {
+      bestSortBox.checked = false;
+    }
+  }
 
     manualSort = true;
     const bestSortBox = document.getElementById("best_sort");
@@ -250,7 +259,7 @@ function sortTable(columnIndex, type, forceBest = false) {
     const details = Array.from(tbody.querySelectorAll("tr.details-row"));
 
     const currentDirection = sortDirection[columnIndex] || "desc";
-    const newDirection = currentDirection === "asc" ? "desc" : "asc";
+    const newDirection = directionOverride || (currentDirection === "asc" ? "desc" : "asc");
     sortDirection[columnIndex] = newDirection;
 
     rows.sort((a, b) => {
@@ -276,11 +285,13 @@ function sortTable(columnIndex, type, forceBest = false) {
   }
 
 
+
 function handleBestSort() {
   const box = document.getElementById("best_sort");
   if (!box || !box.checked) return;
-  sortTable(6, 'number', true);  // sadece en karlıya göre sırala
+  sortTable(6, 'number', true, 'desc');
 }
+
 
 
 </script>
