@@ -40,6 +40,7 @@ def run_analysis(initial_investment, monthly_contribution, annual_return, annual
 
         if is_cash:
             if pesinat <= 0:
+                total_payment = 0  # sıfır ödeme durumu net belirt
                 schedule.append("⚠️ Nakit fiyatı girilmediği için ödeme yapılmadı.")
             else:
                 # Alım tarihine kadar yatırım yapılır

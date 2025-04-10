@@ -227,7 +227,16 @@
   
   let manualSort = false;
 
-  function sortTable(columnIndex, type) {
+  
+function sortTable(columnIndex, type, forceBest = false) {
+    if (!forceBest) {
+        manualSort = true;
+        const bestSortBox = document.getElementById("best_sort");
+        if (bestSortBox && bestSortBox.checked) {
+            bestSortBox.checked = false;
+        }
+    }
+
     manualSort = true;
     const bestSortBox = document.getElementById("best_sort");
     if (bestSortBox && bestSortBox.checked) {
@@ -266,13 +275,13 @@
     }
   }
 
+
 function handleBestSort() {
   const box = document.getElementById("best_sort");
   if (!box || !box.checked) return;
-
-  // Tabloyu fark sütununa göre sırala (6. sütun, yani index 6)
-  sortTable(6, 'number');
+  sortTable(6, 'number', true);  // sadece en karlıya göre sırala
 }
+
 
 </script>
 </body>
